@@ -1,3 +1,15 @@
+import os
+
+# Disable Chroma telemetry spam
+os.environ["ANONYMIZED_TELEMETRY"] = "False"
+
+# Force Chroma to use pysqlite3 instead of system sqlite3
+try:
+    __import__("pysqlite3")
+    import sys
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
 # Force Chroma to use pysqlite3 instead of system sqlite3
 try:
     __import__("pysqlite3")
