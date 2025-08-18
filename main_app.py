@@ -1,3 +1,10 @@
+# Force Chroma to use pysqlite3 instead of system sqlite3
+try:
+    __import__("pysqlite3")
+    import sys
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass  # fallback if pysqlite3 isn't available
 # ================== DuDraw Code Generator ==================
 import streamlit as st
 st.set_page_config(page_title="DuDraw Code Generator", layout="wide")
